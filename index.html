@@ -13,11 +13,20 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+s.parentNode.insertBefore(t,s)}(
+window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js'
+);
 
 fbq('init', '1459025329164730');
-fbq('track', 'PageView');
+
+/* 🔒 PAGE VIEW — ONLY ONCE PER DEVICE */
+try{
+  if(!localStorage.getItem("page_view_fired")){
+    fbq('track','PageView');
+    localStorage.setItem("page_view_fired","1");
+  }
+}catch(e){}
 </script>
 
 <noscript>
@@ -37,18 +46,15 @@ text-align:center;
 min-height:100vh;
 overflow-x:hidden;
 }
-
 .container{
 max-width:420px;
 margin:auto;
 padding:30px 20px 50px;
 }
-
 @keyframes glowPulse{
 0%,100%{box-shadow:0 0 20px rgba(212,175,55,.5)}
 50%{box-shadow:0 0 40px rgba(212,175,55,.8)}
 }
-
 .logo-wrap{margin:25px 0;display:flex;justify-content:center;}
 .logo-gold{
 width:160px;height:160px;border-radius:50%;
@@ -59,7 +65,6 @@ animation:glowPulse 2.5s infinite;
 .logo-gold img{
 width:100%;height:100%;border-radius:50%;
 }
-
 h1{
 font-size:32px;
 font-weight:900;
@@ -68,9 +73,7 @@ background:linear-gradient(135deg,#f4d03f,#f39c12);
 -webkit-text-fill-color:transparent;
 margin:15px 0;
 }
-
 .sub{color:#c0a375;margin-bottom:25px;}
-
 .info-box{
 background:#16213e;
 border-radius:18px;
@@ -80,7 +83,6 @@ border:1px solid rgba(244,208,63,.2);
 }
 .info-box h3{color:#f4d03f;margin-top:0}
 .info-box li{margin:10px 0}
-
 .join-btn{
 display:block;
 margin:30px auto;
@@ -93,16 +95,13 @@ border-radius:25px;
 background:linear-gradient(135deg,#667eea,#764ba2);
 box-shadow:0 15px 35px rgba(102,126,234,.4);
 }
-
 .join-btn:hover{transform:translateY(-2px)}
-
 .live{
 margin-top:15px;
 font-size:18px;
 font-weight:800;
 color:#f4d03f;
 }
-
 .client-box{
 margin-top:20px;
 background:#16213e;
@@ -110,13 +109,11 @@ border-radius:18px;
 padding:18px;
 border:1px solid rgba(244,208,63,.2);
 }
-
 .profit{
 font-size:22px;
 font-weight:900;
 color:#00ff88;
 }
-
 .warn{
 margin-top:25px;
 font-size:12px;
@@ -151,7 +148,7 @@ border-left:3px solid #f39c12;
     </ul>
   </div>
 
-  <!-- 🔥 FIXED BUTTON -->
+  <!-- 🔥 JOIN BUTTON -->
   <a href="javascript:void(0)" class="join-btn" onclick="trackTelegramSubscribe()">
     🚀 JOIN OUR TELEGRAM NOW
   </a>
@@ -182,7 +179,6 @@ function trackTelegramSubscribe(){
     }
   }catch(e){}
 
-  // Instant redirect (safe for mobile & in-app browsers)
   window.location.href = "https://t.me/+aWZDGbiL54E4ZmU9";
 }
 </script>
