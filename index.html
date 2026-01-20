@@ -10,7 +10,7 @@
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+if(!f._fbq)f.fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(
@@ -18,15 +18,8 @@ window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js'
 );
 
-fbq('init', '1459025329164730');
-
-/* 🔒 PAGE VIEW — ONLY ONCE PER DEVICE */
-try{
-  if(!localStorage.getItem("page_view_fired")){
-    fbq('track','PageView');
-    localStorage.setItem("page_view_fired","1");
-  }
-}catch(e){}
+fbq('init','1459025329164730');
+fbq('track','PageView');
 </script>
 
 <noscript>
@@ -44,7 +37,6 @@ background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#16213e 100%);
 color:#f0f0f0;
 text-align:center;
 min-height:100vh;
-overflow-x:hidden;
 }
 .container{
 max-width:420px;
@@ -109,11 +101,6 @@ border-radius:18px;
 padding:18px;
 border:1px solid rgba(244,208,63,.2);
 }
-.profit{
-font-size:22px;
-font-weight:900;
-color:#00ff88;
-}
 .warn{
 margin-top:25px;
 font-size:12px;
@@ -148,7 +135,7 @@ border-left:3px solid #f39c12;
     </ul>
   </div>
 
-  <!-- 🔥 JOIN BUTTON -->
+  <!-- JOIN BUTTON -->
   <a href="javascript:void(0)" class="join-btn" onclick="trackTelegramSubscribe()">
     🚀 JOIN OUR TELEGRAM NOW
   </a>
@@ -167,19 +154,20 @@ border-left:3px solid #f39c12;
 
 </div>
 
-<!-- ================= TELEGRAM + TRACKING SCRIPT ================= -->
+<!-- ================= TELEGRAM SUBSCRIBE TRACKING ================= -->
 <script>
 function trackTelegramSubscribe(){
-  try{
-    if(typeof fbq === "function"){
-      if(!localStorage.getItem("tg_subscribed")){
-        fbq('track','Subscribe',{platform:'telegram'});
-        localStorage.setItem("tg_subscribed","1");
-      }
-    }
-  }catch(e){}
 
-  window.location.href = "https://t.me/+aWZDGbiL54E4ZmU9";
+  if(!sessionStorage.getItem("tg_subscribe")){
+    fbq('track','Subscribe',{
+      content_name:'Zero To Hero Telegram'
+    });
+    sessionStorage.setItem("tg_subscribe","1");
+  }
+
+  setTimeout(function(){
+    window.location.href = "https://t.me/+aWZDGbiL54E4ZmU9";
+  }, 300);
 }
 </script>
 
